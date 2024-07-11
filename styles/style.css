@@ -1,0 +1,242 @@
+:root {
+  --white: #fbfaff;
+  --blue: rgb(80, 81, 249);
+  --lightBlue: rgb(106, 106, 251);
+  --contentBg: rgb(243, 246, 253);
+  --lightGray: rgb(251, 250, 255);
+  --gray: rgb(230, 233, 237);
+  --lightPurple: rgb(237, 236, 254);
+}
+
+* {
+  font-family: "Comfortaa", sans-serif;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.button {
+  cursor: pointer;
+  border-radius: 9px;
+  border: none;
+  background: rgb(237, 236, 254);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 14px;
+  padding: 15px 30px;
+  color: rgb(80, 81, 249);
+}
+
+input {
+  box-sizing: border-box;
+  border: 1px solid rgb(231, 235, 251);
+  border-radius: 9px;
+  background: rgb(255, 255, 255);
+  padding: 12px 20px;
+  flex: 1;
+
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+input::placeholder {
+  color: rgb(136, 153, 168);
+}
+
+.app {
+  display: flex;
+}
+
+.app {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 150px 1fr;
+}
+
+.panel {
+  background-color: var(--white);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding-top: 30px;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 25px;
+}
+
+.menu__list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-top: 75px;
+  gap: 25px;
+}
+
+.menu__item {
+  border-radius: 14px;
+
+  box-shadow: 0px 8px 14px 0px rgba(62, 107, 224, 0.12);
+  background: rgb(255, 255, 255);
+
+  padding: 10px 12px;
+}
+
+.menu__item-active {
+  background-color: var(--blue);
+}
+
+.menu__item-active img {
+  filter: brightness(0) invert(100%);
+}
+
+.menu__item:hover {
+  background-color: var(--lightBlue);
+}
+
+.menu__item:hover img {
+  filter: brightness(0) invert(100%);
+}
+
+/*content style*/
+
+.content {
+  min-width: 900px;
+  padding: 45px;
+
+  background-color: var(--contentBg);
+}
+
+main {
+  margin-top: 30px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h1 {
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 33px;
+  text-align: left;
+}
+
+.progress {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 235px;
+}
+
+.progress__name {
+  color: rgb(35, 35, 96);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+  text-align: left;
+}
+
+.progress__percent {
+  color: rgb(118, 131, 150);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 13px;
+  text-align: left;
+}
+
+.progress__text {
+  display: flex;
+  justify-content: space-between;
+}
+
+.progress__bar {
+  position: relative;
+
+  width: 100%;
+  height: 5px;
+  border-radius: 4px;
+  background: var(--gray);
+}
+
+.progress__bar__active {
+  position: absolute;
+
+  height: 5px;
+  border-radius: 4px;
+  background-color: var(--blue);
+
+  transition: all 0.5s;
+}
+
+.habbit {
+  display: flex;
+  background-color: #fff;
+  border-radius: 10px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.habbit__day {
+  min-width: 150px;
+  background-color: var(--lighGray);
+  border-radius: 10px 0 0 10px;
+  border-right: 1px solid rgb(231, 235, 251);
+  font-size: 14px;
+  line-height: 16px;
+
+  padding: 20px 40px;
+}
+
+.habbit__comment {
+  font-size: 16px;
+  line-height: 18px;
+
+  padding: 20px 25px;
+}
+
+.habbit__delete {
+  margin-left: auto;
+  margin-right: 10px;
+  background-color: transparent;
+  border: none;
+  padding: 5px;
+}
+
+.habbit__form {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+  padding: 0 10px 0 25px;
+  position: relative;
+}
+
+.input_icon {
+  padding-left: 45px;
+}
+
+.input__icon {
+  position: absolute;
+  top: 10px;
+  left: 45px;
+}
+
+.error {
+  border: 2px solid red;
+}
