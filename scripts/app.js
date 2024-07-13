@@ -16,6 +16,10 @@ const page = {
     habbitDay: document.querySelector("#days"),
     nextDay: document.querySelector(".habbit__day"),
   },
+  modal: {
+    overlay: document.querySelector(".overlay"),
+    hiddenInput: document.querySelector(".modal__form-icon-input"),
+  },
 };
 
 //data utils
@@ -141,6 +145,17 @@ function removeDay(activeHabbit) {
         rerender(activeHabbit.id);
       });
     });
+}
+
+function toggleModal() {
+  page.modal.overlay.classList.toggle("overlay__hidden");
+}
+
+function setIcon(ctx, icon) {
+  page.modal.hiddenInput.value = icon;
+  const activeIcon = document.querySelector(".icon__active");
+  activeIcon.classList.remove("icon__active");
+  ctx.classList.add("icon__active");
 }
 
 function rerender(activeHabbitId) {

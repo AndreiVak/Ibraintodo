@@ -19,7 +19,7 @@
         <img src="./images/logo.svg" alt="Logo" />
         <nav class="menu">
           <div class="menu__list"></div>
-          <button class="menu__item">
+          <button onclick="toggleModal()" class="menu__item">
             <img src="./images/add.svg" alt="add habbit" />
           </button>
         </nav>
@@ -57,6 +57,40 @@
             </form>
           </div>
         </main>
+      </div>
+      <div class="overlay overlay__hidden">
+        <div class="modal">
+          <h2>Новая привычка</h2>
+          <div class="icon__label">Иконка</div>
+
+          <div class="icon__select">
+            <button onclick="setIcon(this, 'gym')" class="icon icon__active">
+              <img src="./images/gym.svg" alt="gym" />
+            </button>
+            <button onclick="setIcon(this, 'water')" class="icon">
+              <img src="./images/water.svg" alt="water" />
+            </button>
+            <button onclick="setIcon(this, 'food')" class="icon">
+              <img src="./images/food.svg" alt="food" />
+            </button>
+          </div>
+
+          <button onclick="toggleModal()" class="icon close__btn">
+            <img src="./images/close.svg" alt="close modal" />
+          </button>
+
+          <form class="modal__form">
+            <input type="text" name="name" placeholder="Название" />
+            <input
+              type="text"
+              hidden
+              name="icon"
+              class="modal__form-icon-input"
+            />
+            <input type="number" name="target" placeholder="Цель" />
+            <button class="button" type="submit">Добавить</button>
+          </form>
+        </div>
       </div>
     </div>
     <script src="./scripts/app.js"></script>
