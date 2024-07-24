@@ -98,29 +98,51 @@ function renderContent(activeHabbit) {
   }
 }
 
-function createDay(event) {
-  const form = event.target;
-  event.preventDefault();
-  const data = new FormData(form);
-  const comment = data.get("comment");
-  //valid comment
-  if (!comment) {
-    form["comment"].classList.add("error");
-  } else {
-    form["comment"].classList.remove("error");
+function validForm(form, fields) {
+  const formData = new FormData(form);
+  const result = {};
+
+  for (const field of fields) {
+    const fieldValue = formData.get(field); //comment
+    //valid comment
+    if (!fieldValue) {
+      form[field].classList.add("error");
+      return;
+    } else {
+      form[field].classList.remove("error");
+    }
+    result[field] = fieldValue;
   }
+
+  let isValidForm = true;
+
+  for (const field of fields) {
+    if (!result[field]) {
+      isValidForm = false;
+    }
+  }
+
+  if (!isValidForm) return;
+  return result;
+}
+
+function createDay(event) {
+  event.preventDefault();
+  const data = validForm(event.target, ["comment"]);
+
+  if (!data) return;
   //create day
   habbits = habbits.map((habbit) => {
     if (habbit.id === globalActiveHabbitId) {
       return {
         ...habbit,
-        days: [...habbit.days, { comment: comment }],
+        days: [...habbit.days, { comment: data.comment }],
       };
     } else {
       return habbit;
     }
   });
-  form["comment"].value = "";
+  resetForm(event.target, ["comment"]);
   setData();
   rerender(globalActiveHabbitId);
 }
@@ -147,6 +169,29 @@ function removeDay(activeHabbit) {
     });
 }
 
+function addHabbit(event) {
+  event.preventDefault();
+  const data = validForm(event.target, ["name", "icon", "target"]);
+  if (!data) return;
+  habbits.push({
+    id: habbits.length + 1,
+    name: data.name,
+    target: data.target,
+    icon: data.icon,
+    days: [],
+  });
+  resetForm(event.target, ["name", "target"]);
+  setData();
+  rerender(habbits.at(-1).id);
+  toggleModal();
+}
+
+function resetForm(form, fields) {
+  for (const field of fields) {
+    form[field].value = "";
+  }
+}
+
 function toggleModal() {
   page.modal.overlay.classList.toggle("overlay__hidden");
 }
@@ -160,7 +205,21 @@ function setIcon(ctx, icon) {
 
 function rerender(activeHabbitId) {
   globalActiveHabbitId = activeHabbitId;
+  habbits = habbits.map((habbit) => {
+    if (habbit.id === activeHabbitId) {
+      return {
+        ...habbit,
+        isActive: true,
+      };
+    }
+    return {
+      ...habbit,
+      isActive: false,
+    };
+  });
+
   const selectetHabbit = habbits.find((habbit) => habbit.id === activeHabbitId);
+  setData();
   rerenderMenu(selectetHabbit);
   renderHeader(selectetHabbit);
   renderContent(selectetHabbit);
@@ -170,5 +229,6 @@ function rerender(activeHabbitId) {
 //init (запуск приложения)
 (() => {
   getData();
-  rerender(habbits[0].id);
+  const findActiveHabbit = habbits.find((habbit) => habbit.isActive);
+  rerender(findActiveHabbit.id);
 })();
